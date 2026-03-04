@@ -1,0 +1,16 @@
+{
+  "name": "uthana-text2fbx",
+  "version": "1.0.0",
+  "description": "CLI to generate Uthana text-to-motion and download as FBX",
+  "type": "module",
+  "bin": {
+    "uthana-text2fbx": "./src/uthana_text2fbx.js"
+  },
+  "scripts": {
+    "start": "node ./src/uthana_text2fbx.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
