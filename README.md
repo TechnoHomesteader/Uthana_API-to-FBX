@@ -1,5 +1,11 @@
 # Uthana Text-to-FBX Downloader (V1 MVP)
 
+## Summary Overview
+
+This project is a focused MVP command-line tool for turning plain English motion ideas into downloadable FBX animation files. You provide three things: an API key, a character ID, and a text prompt describing movement. The CLI sends that prompt to Uthana's GraphQL API, receives a generated motion ID, builds the expected `motion_viewer` FBX URL for your character, and streams the file to disk.
+
+The flow is intentionally simple and production-pragmatic for a first version: no UI, no queueing system, and no database. It is designed to be easy to run in scripts or pipeline steps where you want a single command that goes from prompt to FBX output with clear logs and predictable exit codes.
+
 Minimal Node.js CLI to:
 1. Submit a text prompt to Uthana GraphQL (`create_text_to_motion`)
 2. Read the returned `motion.id`
