@@ -1,34 +1,50 @@
-# Implementation Plan
+# Implementation Plan (Roadmap 2)
 
 ## Objective
 
-Deliver a local-first web interface while preserving and sharing logic with the existing CLI.
+Make the toolkit OS-agnostic with explicit Windows support while preserving the existing working
+CLI + web functionality.
+
+## Scope
+
+In scope:
+
+1. Cross-platform launch workflow.
+2. Cross-platform file reveal behavior.
+3. Windows onboarding documentation.
+4. Tests for platform-dependent behavior.
+
+Out of scope:
+
+1. New product features unrelated to OS support.
+2. Auth persistence redesign.
+3. Cloud deployment.
 
 ## Work Breakdown
 
-1. Shared module extraction:
-   - Move GraphQL and download logic into `src/lib/*`.
-   - Keep CLI entrypoint thin and stable.
-2. Web server:
-   - Add Express server with local API endpoints.
-   - Add request validation and error mapping.
-3. Frontend:
-   - Build minimal single-page UI for prompt->preview->download flow.
-   - Add status feed and account panel.
-4. Tooling:
-   - Add `Makefile` commands for setup/run/test.
-   - Add npm scripts for CLI/web/test.
-5. Documentation:
-   - Update README.
-   - Add AGENTS/handoff/decision-tree docs.
-6. Validation:
-   - Add unit tests for path and URL helpers.
-   - Manual smoke test for UI and CLI parity.
+1. Launch command normalization:
+   - Add Node-based launcher script in `scripts/` (or equivalent) to avoid shell-specific `open`.
+   - Add npm scripts as primary entrypoint for UI start.
+   - Keep `make` commands as optional convenience on macOS.
+2. Reveal endpoint portability:
+   - Keep macOS path: `open -R <file>`.
+   - Add Windows path: `explorer /select,<file>`.
+   - Return structured unsupported response for other OSes.
+3. Frontend compatibility:
+   - Keep current button UX.
+   - Surface platform-specific reveal messages cleanly in status feed.
+4. Documentation updates:
+   - Add Windows setup and run sections to README.
+   - Add troubleshooting notes for PowerShell and PATH issues.
+5. Test plan expansion:
+   - Unit tests for platform branch selection.
+   - Integration tests for `/api/reveal` across mocked `process.platform` values.
+   - Preserve existing tests for shared URL/path helpers.
 
 ## Acceptance Criteria
 
-1. `make ui` starts server and auto-opens browser.
-2. User can fetch characters, generate motion, preview, and download FBX.
-3. User can reveal downloaded file in Finder (macOS).
-4. Existing CLI command format and exit codes remain valid.
-5. `make test` runs successfully.
+1. UI launch is supported on both macOS and Windows with one documented command path.
+2. Reveal works on macOS and Windows; unsupported platforms get a clear non-error response.
+3. CLI behavior and exit codes remain unchanged.
+4. Existing web flow (characters -> generate -> preview -> download) remains functional.
+5. Test suite covers new platform branches and passes.

@@ -16,6 +16,7 @@ Agents should preserve parity between CLI and web behavior by updating shared mo
 2. Prefer shared module changes over duplicating API logic.
 3. Keep API keys session-scoped in web mode; do not add key persistence.
 4. Keep output defaults under `out/` unless explicitly requested.
+5. Treat cross-platform support as a core constraint for roadmap-2+ changes.
 
 ## Common Commands
 
@@ -54,3 +55,11 @@ make test
    - `3` download error
 3. Finder reveal endpoint must stay restricted to files under `out/`.
 4. Keep account usage panel non-blocking for generation flow.
+
+## Roadmap Notes
+
+1. Roadmap 1 (current) is delivered: working CLI + web UI.
+2. Roadmap 2 priority is OS agnostic support:
+   - Windows-compatible launch command path
+   - platform-aware reveal behavior
+   - Windows documentation parity

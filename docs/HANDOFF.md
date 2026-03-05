@@ -1,36 +1,53 @@
 # Handoff Document
 
-## Current State
+## Snapshot
 
-The project now supports both CLI and local web UI workflows with shared API modules.
+Roadmap 1 is effectively complete. The repository now ships a working CLI and a working local web
+UI backed by shared modules.
 
-- CLI still supports prompt -> motion -> FBX download in one command.
-- Web UI provides:
-  - API key input (session only)
-  - character fetch and selection
-  - prompt submission
-  - preview-first flow
-  - explicit FBX download
-  - Finder reveal action on macOS
-  - status feed and best-effort account panel
+Completed in Roadmap 1:
+
+1. CLI flow from prompt -> motion generation -> FBX download.
+2. Local web flow with prompt entry, generation, preview link, download, and status feed.
+3. Character selection and account usage support against the current Uthana schema.
+4. Shared API/download modules used by both CLI and web.
+5. Basic tests, docs, and launch commands.
 
 ## Runtime Topology
 
-- Node server (`src/web/server.js`) serves static frontend and local API endpoints.
-- Frontend (`src/web/public/app.js`) calls local endpoints and maintains in-memory session state.
-- Shared Uthana calls are in `src/lib/uthanaClient.js`.
-- FBX URL/download logic is in `src/lib/fbx.js`.
+1. `src/web/server.js` exposes local API routes and serves static UI.
+2. `src/web/public/app.js` manages in-browser flow and status feed.
+3. `src/lib/uthanaClient.js` handles GraphQL auth + query fallbacks.
+4. `src/lib/fbx.js` builds preview/download URLs and streams FBX files.
+5. `src/uthana_text2fbx.js` remains the automation-first CLI entrypoint.
 
-## Known Limitations
+## Known Limitations (Current)
 
-1. Character and account queries use known query-shape fallbacks; schema changes may require updates.
-2. Account usage is best effort and may be unavailable depending on API schema/permissions.
-3. Reveal endpoint is only implemented for macOS Finder.
-4. No persisted job history or session store.
+1. Launch workflow is still Make/macOS-oriented (`make ui`, `open` command).
+2. Reveal action currently targets Finder behavior only.
+3. Account usage depends on fallback query shapes and may need updates if API changes.
+4. No persisted history/session state.
 
-## Immediate Next Steps
+## Roadmap 2 (Next)
 
-1. Add mocked integration tests for web endpoints.
-2. Add structured request logging with redaction for API key fields.
-3. Add optional custom output filename input in UI.
-4. Add retry/backoff for transient GraphQL and download failures.
+Primary objective: make the toolkit OS-agnostic, with first-class Windows support.
+
+1. Cross-platform launch UX:
+   - Replace or supplement Make-based launch with Node/npm launcher commands that work on macOS and Windows.
+   - Keep one obvious command to start UI, with optional auto-open browser behavior.
+2. Cross-platform file reveal:
+   - Support macOS Finder (`open -R`) and Windows Explorer (`explorer /select,`), with graceful fallback.
+3. Cross-platform docs and onboarding:
+   - Add explicit macOS + Windows quickstarts.
+   - Document shell differences and environment variable setup on PowerShell.
+4. Stabilize web smoke/integration coverage:
+   - Add endpoint-level tests for `/api/characters`, `/api/account`, `/api/generate`, `/api/download`, `/api/reveal`.
+5. Keep CLI parity:
+   - Any shared-module change must preserve CLI behavior and exit code contract.
+
+## Suggested First Tasks for Next Session
+
+1. Add `npm run ui` and `npm run ui:no-open` scripts using a Node-based launcher (not shell-specific).
+2. Implement platform-aware `reveal` branch in server for `darwin` and `win32`.
+3. Add `README` sections: Windows setup + launch.
+4. Add integration tests with mocked GraphQL and mocked filesystem/child-process calls.

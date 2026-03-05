@@ -24,6 +24,20 @@ save FBX files directly into this repository's `out/` directory by default.
   - Status feed
 - Best-effort account usage panel (non-blocking)
 
+## Roadmap Status
+
+Roadmap 1 is complete enough for daily use:
+
+1. Prompt to motion generation is working in both CLI and web UI.
+2. Preview and download flow is working.
+3. Character fetch and account usage are working against the current schema.
+
+Roadmap 2 is next:
+
+1. Make launch and reveal behavior OS-agnostic, with explicit Windows support.
+2. Add a cleaner cross-platform UI launch flow (npm-first, Make optional).
+3. Expand tests for platform-specific behavior.
+
 ## Requirements
 
 - macOS (for Finder reveal + auto-open browser command)
