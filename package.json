@@ -1,13 +1,19 @@
 {
   "name": "uthana-text2fbx",
   "version": "1.0.0",
-  "description": "CLI to generate Uthana text-to-motion and download as FBX",
+  "description": "CLI and local web UI for Uthana text-to-motion FBX generation",
   "type": "module",
   "bin": {
     "uthana-text2fbx": "./src/uthana_text2fbx.js"
   },
   "scripts": {
-    "start": "node ./src/uthana_text2fbx.js"
+    "cli": "node ./src/uthana_text2fbx.js",
+    "web": "node ./src/web/server.js",
+    "start": "npm run cli",
+    "test": "node --test ./test/*.test.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
   },
   "engines": {
     "node": ">=18"

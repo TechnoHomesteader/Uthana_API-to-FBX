@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uthana Motion Console</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Local Workflow</p>
+        <h1>Uthana Motion Console</h1>
+        <p>
+          Generate motion from text, preview it on Uthana, then download FBX locally for your
+          pipeline.
+        </p>
+      </header>
+
+      <section class="panel">
+        <h2>1. Credentials and Character</h2>
+        <div class="row">
+          <label for="apiKey">API Key</label>
+          <input id="apiKey" type="password" placeholder="Paste Uthana API key" autocomplete="off" />
+        </div>
+        <div class="row inline">
+          <button id="loadCharactersBtn" type="button">Load Characters</button>
+          <span id="characterStatus" class="hint">No characters loaded.</span>
+        </div>
+        <div class="row">
+          <label for="characterSelect">Character</label>
+          <select id="characterSelect" disabled>
+            <option value="">Load characters first</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>2. Prompt and Generate</h2>
+        <div class="row">
+          <label for="prompt">Prompt</label>
+          <textarea
+            id="prompt"
+            rows="4"
+            placeholder="a tired person sits, leans forward, rubs temples, then stands slowly"
+          ></textarea>
+        </div>
+        <div class="row inline">
+          <button id="generateBtn" type="button">Generate Motion</button>
+          <span id="generateStatus" class="hint">Waiting for prompt.</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>3. Result</h2>
+        <p><strong>Motion ID:</strong> <span id="motionId">-</span></p>
+        <p>
+          <strong>Preview:</strong>
+          <a id="previewLink" href="#" target="_blank" rel="noopener noreferrer">Not available yet</a>
+        </p>
+        <div class="row inline">
+          <button id="downloadBtn" type="button" disabled>Download FBX</button>
+          <button id="revealBtn" type="button" disabled>Reveal In Finder</button>
+        </div>
+        <p><strong>Saved file:</strong> <span id="savedPath">-</span></p>
+      </section>
+
+      <section class="panel">
+        <h2>Account Usage (Best Effort)</h2>
+        <p id="accountInfo" class="hint">Load characters to query account usage.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Status Feed</h2>
+        <ol id="statusFeed" class="status-feed"></ol>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

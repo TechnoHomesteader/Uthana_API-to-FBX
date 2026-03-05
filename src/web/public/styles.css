@@ -1,0 +1,180 @@
+:root {
+  --bg-1: #faf4eb;
+  --bg-2: #fffdf7;
+  --ink: #1e2625;
+  --accent: #d65a31;
+  --accent-deep: #a93f1d;
+  --panel: #ffffffd9;
+  --muted: #5f6a67;
+  --line: #d7d3ca;
+  --ok: #216e3a;
+  --warn: #8f5d0a;
+  --err: #8f2626;
+  --shadow: 0 10px 28px rgba(33, 27, 14, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 20%, #ffd8ab99, transparent 45%),
+    radial-gradient(circle at 90% 10%, #f7b27f88, transparent 38%),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  min-height: 100vh;
+}
+
+.app-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.2rem 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero {
+  background: linear-gradient(110deg, #fff5e7, #fff);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.hero h1 {
+  margin: 0.4rem 0 0.6rem;
+  font-family: "Gill Sans", "Avenir Next", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.panel h2 {
+  margin: 0 0 0.9rem;
+  font-family: "Gill Sans", "Avenir Next", sans-serif;
+  font-size: 1.1rem;
+}
+
+.row {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.row.inline {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #c6c0b2;
+  border-radius: 10px;
+  padding: 0.62rem 0.7rem;
+  background: #fff;
+  color: var(--ink);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: 1px solid var(--accent-deep);
+  background: linear-gradient(180deg, #e87045, var(--accent));
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--accent-deep);
+  word-break: break-all;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.status-feed {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.status-feed li {
+  line-height: 1.45;
+}
+
+.status-info {
+  color: var(--ink);
+}
+
+.status-ok {
+  color: var(--ok);
+}
+
+.status-warn {
+  color: var(--warn);
+}
+
+.status-error {
+  color: var(--err);
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    padding: 1.25rem 0.9rem 2rem;
+  }
+
+  .row.inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
